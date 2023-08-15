@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To do List</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <div class="box" id="heading">
+    <!-- <h1>To do List</h1> -->
+    <h1>
+      <%= listTitle %>
+    </h1>
+  </div>
+  <div class="box">
+    <form action="/addTask" method="post">
+      <label for="task">Task</label>
+      <input type="text" name="task" placeholder="Enter your task" autocomplete="off">
+      <label for="duration">Task Deadline</label>
+      <input type="date" name="duration" placeholder="Enter duration">
+      <select name="priority" id="priority">
+        <option value="high">HIGH</option>
+        <option value="medium">MEDIUM</option>
+        <option value="low">LOW</option>
+      </select>
+      <button type="submit" class="btn">Add Task</button>
+    </form>
+    <table id="taskList">
+      <% for (let i=0; i < tasks.length; i++) { %>
+        <tr>
+          <td>
+            <%= tasks[i] %>
+          </td>
+          <td>
+            <%= durations[i] %>
+          </td>
+          <td>
+            <%= priorities[i] %>
+          </td>
+          <td>
+            <form action="/deleteTask" method="POST">
+              <input type="hidden" name="taskIndex" value="<%= i %>">
+              <button type="submit" class="deleteBtn">Delete</button>
+            </form>
+          </td>
+        </tr>
+
+        <% } %>
+
+    </table>
+  </div>
+</body>
+
+</html>
